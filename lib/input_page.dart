@@ -6,12 +6,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const bottomContainerHeight = 80.0;
 
+enum Gender {
+  male,
+  famale,
+}
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender genderSelected;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,18 +30,36 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                ReusableCard(
-                  colour: AppColors.activeCardColour,
-                  carChild: IconContent(
-                    label: 'MALE',
-                    icon: FontAwesomeIcons.mars,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      genderSelected = Gender.famale;
+                    });
+                  },
+                  child: ReusableCard(
+                    colour: genderSelected == Gender.male
+                        ? AppColors.activeCardColour
+                        : AppColors.inactiveCardColour,
+                    carChild: IconContent(
+                      label: 'MALE',
+                      icon: FontAwesomeIcons.mars,
+                    ),
                   ),
                 ),
-                ReusableCard(
-                  colour: AppColors.activeCardColour,
-                  carChild: IconContent(
-                    label: 'FAMALE',
-                    icon: FontAwesomeIcons.venus,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      genderSelected = Gender.famale;
+                    });
+                  },
+                  child: ReusableCard(
+                    colour: genderSelected == Gender.famale
+                        ? AppColors.activeCardColour
+                        : AppColors.inactiveCardColour,
+                    carChild: IconContent(
+                      label: 'FAMALE',
+                      icon: FontAwesomeIcons.venus,
+                    ),
                   ),
                 ),
               ],
